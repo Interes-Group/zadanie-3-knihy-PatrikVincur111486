@@ -1,8 +1,10 @@
 package sk.stuba.fei.uim.oop.assignment3.book.bookService;
 
-import javassist.NotFoundException;
+import org.aspectj.weaver.ast.Not;
 import sk.stuba.fei.uim.oop.assignment3.book.bookController.BookRequest;
+import sk.stuba.fei.uim.oop.assignment3.book.bookController.BookUpdateRequest;
 import sk.stuba.fei.uim.oop.assignment3.book.bookData.Book;
+import sk.stuba.fei.uim.oop.assignment3.exceptions.NotFoundException;
 
 import java.util.List;
 
@@ -11,4 +13,10 @@ public interface IBookService {
 
     Book create(BookRequest request);
 
+    Book getById(Long id) throws NotFoundException;
+
+    Book update(long id, BookUpdateRequest request) throws NotFoundException;
+
+    void delete(Long id) throws NotFoundException;
 }
+

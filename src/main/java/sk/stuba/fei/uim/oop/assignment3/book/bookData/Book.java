@@ -24,7 +24,7 @@ public class Book {
 
     private String name;
     private String description;
-    private Integer authorID;
+    private Integer author;
     private Integer pages;
     private Integer amount;
     private Integer lendCount;
@@ -32,7 +32,7 @@ public class Book {
     public Book(BookRequest request){
         this.name = request.getName();
         this.description = request.getDescription();
-        this.authorID = request.getAuthorID();
+        this.author = request.getAuthor();
         this.pages = request.getPages();
         this.amount = request.getAmount();
         this.lendCount = request.getLendCount();

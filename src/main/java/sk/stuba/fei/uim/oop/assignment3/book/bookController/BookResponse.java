@@ -8,7 +8,7 @@ public class BookResponse {
     private Long id;
     private String name;
     private String description;
-    private Integer authorID;
+    private Integer author;
     private Integer pages;
     private Integer amount;
     private Integer lendCount;
@@ -17,7 +17,7 @@ public class BookResponse {
         this.id = b.getId();
         this.name = b.getName();
         this.description = b.getDescription();
-        this.authorID = b.getAuthorID();
+        this.author = b.getAuthor();
         this.pages = b.getPages();
         this.amount = b.getAmount();
         this.lendCount = b.getLendCount();
