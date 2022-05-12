@@ -11,15 +11,4 @@ public interface IBookService {
 
     Book create(BookRequest request);
 
-    Book getById(long id) throws NotFoundException;
-
-    //Book update(long id, ProductUpdateRequest request) throws NotFoundException;
-
-    void delete(long id) throws NotFoundException;
-
-    long getAmount(long id) throws NotFoundException;
-
-    long addAmount(long id, long increment) throws NotFoundException;
-
-   // void removeAmount(long id, long decrement) throws NotFoundException, IllegalOperationException;
 }

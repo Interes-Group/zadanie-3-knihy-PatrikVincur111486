@@ -25,23 +25,5 @@ public class BookService implements IBookService {
         return this.repository.save(new Book(request));
     }
 
-    @Override
-    public Book getById(long id) throws NotFoundException {
-        return null;
-    }
 
-    @Override
-    public void delete(long id) throws NotFoundException {
-
-    }
-
-    @Override
-    public long getAmount(long id) throws NotFoundException {
-        return 0;
-    }
-
-    @Override
-    public long addAmount(long id, long increment) throws NotFoundException {
-        return 0;
-    }
 }
