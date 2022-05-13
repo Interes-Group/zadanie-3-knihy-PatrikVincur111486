@@ -8,6 +8,6 @@ import lombok.Setter;
 public class BookUpdateRequest {
     private String name;
     private String description;
-    private Integer author;
+    private Long author;
     private Integer pages;
 }

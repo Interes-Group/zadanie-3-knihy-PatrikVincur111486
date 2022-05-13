@@ -8,7 +8,7 @@ public class BookResponse {
     private Long id;
     private String name;
     private String description;
-    private Integer author;
+    private Long author;
     private Integer pages;
     private Integer amount;
     private Integer lendCount;

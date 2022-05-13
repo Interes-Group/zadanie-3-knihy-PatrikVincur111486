@@ -4,12 +4,11 @@ package sk.stuba.fei.uim.oop.assignment3.book.bookData;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sk.stuba.fei.uim.oop.assignment3.author.authorData.Author;
 import sk.stuba.fei.uim.oop.assignment3.book.bookController.BookRequest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 
 @Entity
@@ -24,7 +23,8 @@ public class Book {
 
     private String name;
     private String description;
-    private Integer author;
+
+    private Long author;
     private Integer pages;
     private Integer amount;
     private Integer lendCount;
