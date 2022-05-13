@@ -44,12 +44,16 @@ public class LendingListService implements ILendingListService {
 
     @Override
     public void deleteList(Long id) throws NotFoundException {
-        if(this.repository.findLendingListById(id) == null){
+        LendingList list = this.repository.findLendingListById(id);
+        if(list == null){
             throw new NotFoundException();
         }
-        if(!getListById(id).isLended()){
-            this.repository.delete(this.getListById(id));
+        if(list.isLended()){
+            for(Book books: list.getBooks()){
+                books.setLendCount(books.getLendCount()-1);
+            }
         }
+        this.repository.delete(list);
     }
 
     @Override
