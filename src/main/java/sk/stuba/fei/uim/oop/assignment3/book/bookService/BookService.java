@@ -3,7 +3,6 @@ package sk.stuba.fei.uim.oop.assignment3.book.bookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.author.authorData.Author;
-import sk.stuba.fei.uim.oop.assignment3.author.authorData.IAuthorRepository;
 import sk.stuba.fei.uim.oop.assignment3.author.authorService.IAuthorService;
 import sk.stuba.fei.uim.oop.assignment3.book.bookController.BookRequest;
 import sk.stuba.fei.uim.oop.assignment3.book.bookController.BookUpdateRequest;
@@ -17,24 +16,30 @@ import java.util.List;
 public class BookService implements IBookService {
 
     @Autowired
-    private IBookRepository repository;
+    private IBookRepository bookRepository;
 
-    //TODO @Autowired
-    //TODO private IAuthorRepository authorRepository;
+    @Autowired
+    private IAuthorService authorService;
 
     @Override
     public List<Book> getAll() {
-        return this.repository.findAll();
+        return this.bookRepository.findAll();
     }
 
     @Override
-    public Book create(BookRequest request) {
-        return this.repository.save(new Book(request));
+    public Book create(BookRequest request) throws NotFoundException {
+        Book b = new Book(request);
+        Author a = this.authorService.getById(request.getAuthor());
+        if (a == null) {
+            throw new NotFoundException();
+        }
+        a.getBooks().add(b);
+        return this.bookRepository.save(b);
     }
 
     @Override
     public Book getById(Long id) throws NotFoundException {
-        Book b = this.repository.findBookById(id);
+        Book b = this.bookRepository.findBookById(id);
         if (b == null) {
             throw new NotFoundException();
         }
@@ -43,27 +48,33 @@ public class BookService implements IBookService {
 
     @Override
     public Book update(Long id, BookUpdateRequest request) throws NotFoundException {
-        Book b = this.getById(id);
+        Book b = this.bookRepository.findBookById(id);
+        if (b == null) {
+            throw new NotFoundException();
+        }
         if (request.getName() != null) {
             b.setName(request.getName());
         }
         if (request.getDescription() != null) {
             b.setDescription(request.getDescription());
         }
-        if (request.getPages() != null) {
-            b.setPages(request.getPages());
-        }
-        if (request.getAuthor() != null) {
+        if (request.getAuthor() != 0) {
             b.setAuthor(request.getAuthor());
         }
-        return this.repository.save(b);
+        if (request.getPages() != 0) {
+            b.setPages(request.getPages());
+        }
+        return this.bookRepository.save(b);
     }
 
     @Override
     public void delete(Long id) throws NotFoundException {
-        //TODO Author a = this.authorRepository.findAuthorById(Long.valueOf(getById(id).getAuthor()));
-        this.repository.delete(this.getById(id));
-
+        Book b = this.bookRepository.findBookById(id);
+        if (b == null) {
+            throw new NotFoundException();
+        }
+        this.authorService.deleteBook(b);
+        this.bookRepository.delete(b);
     }
 
     @Override
@@ -75,14 +86,16 @@ public class BookService implements IBookService {
     public Integer addAmount(Long id, Integer increment) throws NotFoundException {
         Book b = this.getById(id);
         b.setAmount(b.getAmount() + increment);
-        this.repository.save(b);
+        this.bookRepository.save(b);
         return b.getAmount();
     }
 
-    @Override
+   @Override
     public Integer getLendCount(Long id) throws NotFoundException {
+        Book b = this.bookRepository.findBookById(id);
+        if(b == null){
+            throw new NotFoundException();
+        }
         return this.getById(id).getLendCount();
     }
-
-
 }

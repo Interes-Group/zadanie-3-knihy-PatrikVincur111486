@@ -52,16 +52,11 @@ public class AuthorService implements IAuthorService{
 
     @Override
     public void delete(Long id) throws NotFoundException {
-        this.repository.delete(this.getById(id));
-    }
-
-    @Override
-    public void addBook(Book b) throws NotFoundException {
-        Author a = this.repository.findAuthorById(b.getAuthor());
-        if(a == null){
+        Author a = this.getById(id);
+        if(a==null){
             throw new NotFoundException();
         }
-        this.repository.findAuthorById(b.getAuthor()).getBooks().add(b);
+        this.repository.delete(this.getById(id));
     }
 
     @Override

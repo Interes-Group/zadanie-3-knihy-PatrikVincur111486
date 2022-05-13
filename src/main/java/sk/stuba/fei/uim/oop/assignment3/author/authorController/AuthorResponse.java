@@ -12,7 +12,6 @@ public class AuthorResponse {
     private Long id;
     private String name;
     private String surname;
-
     private List<Long> books;
 
 

@@ -23,7 +23,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookResponse> addBook(@RequestBody BookRequest body){
+    public ResponseEntity<BookResponse> addBook(@RequestBody BookRequest body) throws NotFoundException{
         return new ResponseEntity<>(new BookResponse(this.service.create(body)), HttpStatus.CREATED);
     }
 
@@ -53,7 +53,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}/lendCount")
-    public Integer getLendCunt(@PathVariable("id") Long bookId) throws NotFoundException {
-        return this.service.getLendCount(bookId);
+    public Amount getLendCount(@PathVariable("id") Long bookId) throws NotFoundException {
+        return new Amount(this.service.getLendCount(bookId));
     }
 }

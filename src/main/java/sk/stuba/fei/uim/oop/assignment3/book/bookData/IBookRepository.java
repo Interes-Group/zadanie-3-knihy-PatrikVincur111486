@@ -8,6 +8,5 @@ import java.util.List;
 @Repository
 public interface IBookRepository extends JpaRepository<Book, Long> {
     List<Book> findAll();
-
     Book findBookById(Long id);
 }

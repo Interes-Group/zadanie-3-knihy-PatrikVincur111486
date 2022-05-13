@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BookIdRequest {
+public class LendingListRequest {
     private Long id;
 }

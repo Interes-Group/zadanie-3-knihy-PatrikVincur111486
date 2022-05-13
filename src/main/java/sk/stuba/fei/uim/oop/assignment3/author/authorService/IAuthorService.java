@@ -9,17 +9,10 @@ import java.util.List;
 
 public interface IAuthorService {
     List<Author> getAll();
-
     Author create(AuthorRequest request);
-
     Author getById(Long id) throws NotFoundException;
-
     Author update(Long id, AuthorRequest request) throws NotFoundException;
-
     void delete(Long id) throws NotFoundException;
-
-    void addBook(Book b) throws NotFoundException;
-
     void deleteBook(Book b) throws NotFoundException;
 
 

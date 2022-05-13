@@ -34,15 +34,12 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public AuthorResponse updateAuthor(@PathVariable("id") Long authorId, @RequestBody AuthorRequest body) throws NotFoundException {
+    public AuthorResponse updateAuthorById(@PathVariable("id") Long authorId, @RequestBody AuthorRequest body) throws NotFoundException {
         return new AuthorResponse(this.service.update(authorId, body));
     }
 
    @DeleteMapping("/{id}")
-    public void deleteAuthor(@PathVariable("id") Long authorId) throws NotFoundException {
+    public void deleteAuthorById(@PathVariable("id") Long authorId) throws NotFoundException {
         this.service.delete(authorId);
     }
-
-
-
 }

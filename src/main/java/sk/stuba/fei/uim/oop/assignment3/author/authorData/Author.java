@@ -32,6 +32,5 @@ public class Author {
         this.name = request.getName();
         this.surname = request.getSurname();
         this.books = new ArrayList<>();
-
     }
 }

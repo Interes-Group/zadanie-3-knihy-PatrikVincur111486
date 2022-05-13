@@ -8,6 +8,5 @@ import java.util.List;
 @Repository
 public interface ILendingListRepository extends JpaRepository <LendingList, Long> {
     List<LendingList> findAll();
-
     LendingList findLendingListById(Long id);
 }
